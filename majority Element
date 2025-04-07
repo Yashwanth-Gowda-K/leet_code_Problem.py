@@ -1,0 +1,14 @@
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        count = 0               # Initialize a counter to track votes for the majority candidate
+        store = None            # This will store the current majority candidate
+
+        for num in nums:        # Loop through each number in the array
+            if count == 0:      # If the counter is zero, we pick a new candidate
+                store = num     # Set the current number as the new candidate
+
+            # If the number is the same as the current candidate, increment the count
+            # Otherwise, decrement the count
+            count += (1 if num == store else -1)
+
+        return store            # After the loop, the candidate in 'store' is the majority element
