@@ -1,0 +1,10 @@
+class Solution:
+    def removeDuplicates(self, nums): 
+        i = 0  # 'i' points to the position of the last unique element
+
+        for j in range(1, len(nums)):  # we Start from the second element and loop through the list
+            if nums[j] != nums[i]: # If current element is different from the last unique one
+                i += 1  # Move 'i' forward to place the new unique element
+                nums[i] = nums[j] # Copy the unique value to the new position
+
+        return i + 1 if nums else 0  # Return the count of unique elements, 0 if list is empty
