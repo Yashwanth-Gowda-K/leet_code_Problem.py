@@ -1,0 +1,21 @@
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False  # If lengths differ, return False immediately
+
+        count = {}# empty dictionary to store character counts
+
+        for char in s:
+            if char in count:# If the character is already in the dictionary
+                count[char] +=1 # If the character is already in the dictionary
+            else:
+                count [char] =1  # If the character is not in the dictionary, add it with a count of 1
+
+        for char in t:
+            if char not in count:
+                return False
+            count[char] -=1
+            if count[char] < 0:
+                return False
+            
+        return True
