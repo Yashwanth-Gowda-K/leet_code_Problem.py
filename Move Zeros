@@ -1,0 +1,17 @@
+def moveZeroes(nums):
+    # This variable keeps track of the position where the next non-zero element should be placed
+    last_non_zero = 0  
+    
+    # First loop: go through all elements in the list
+    for i in range(len(nums)):
+        # If the current element is not zero, we want to move it forward
+        if nums[i] != 0:
+            # Place the non-zero element at the position of last_non_zero
+            nums[last_non_zero] = nums[i]
+            # Move the last_non_zero pointer to the next position
+            last_non_zero += 1
+            
+    # Second loop: fill the remaining positions in the array with zeros
+    for i in range(last_non_zero, len(nums)):
+        # Set each of the remaining positions to 0
+        nums[i] = 0
