@@ -1,0 +1,10 @@
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        n = len(nums)
+        result = n  # Start with the assumption that the missing number is 'n'
+        
+        # XOR all the numbers from 0 to n
+        for i in range(n):
+            result ^= i ^ nums[i]  # XOR current index 'i' and corresponding 'nums[i]'
+        
+        return result
