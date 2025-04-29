@@ -1,0 +1,43 @@
+class Solution:
+    def findDiagonalOrder(self, mat: List[List[int]]) -> List[int]:
+        # If the matrix is empty, return an empty list
+        if not mat or not mat[0]:
+            return []
+
+        # Get number of rows and columns
+        m, n = len(mat), len(mat[0])
+
+        result = []  # To store the final traversal
+        row, col = 0, 0  # Start position
+        direction = 1    # 1 means up-right, -1 means down-left
+
+        # Traverse all elements in the matrix
+        for _ in range(m * n):
+            result.append(mat[row][col])  # Add current element
+
+            if direction == 1:
+                # If we hit the last column, go down and change direction
+                if col == n - 1:
+                    row += 1
+                    direction = -1
+                # If we hit the top row, go right and change direction
+                elif row == 0:
+                    col += 1
+                    direction = -1
+                else:
+                    row -= 1
+                    col += 1  # Move up-right
+            else:
+                # If we hit the last row, go right and change direction
+                if row == m - 1:
+                    col += 1
+                    direction = 1
+                # If we hit the first column, go down and change direction
+                elif col == 0:
+                    row += 1
+                    direction = 1
+                else:
+                    row += 1
+                    col -= 1  # Move down-left
+
+        return result
