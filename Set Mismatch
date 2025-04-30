@@ -1,0 +1,19 @@
+class Solution:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        nums.sort()  # Sorting  the array
+
+        duplicates = -1
+        missing = 1
+
+        #  Loop through sorted array
+        for i in range(len(nums) - 1):
+            if nums[i] == nums[i + 1]:
+                duplicates = nums[i]  # Found duplicate
+            elif nums[i + 1] - nums[i] > 1:
+                missing = nums[i] + 1  # Found missing number
+
+        # edge case if last number is not equal to length of array
+        if nums[-1] != len(nums) and missing == 1:
+            missing = len(nums)
+
+        return [duplicates, missing]
