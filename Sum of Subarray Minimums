@@ -1,0 +1,37 @@
+from typing import List
+
+class Solution:
+    def sumSubarrayMins(self, arr: List[int]) -> int:
+        MOD = 10**9 + 7  # To prevent integer overflow
+        stack = []       # Monotonic stack
+        res = 0          
+        n = len(arr)
+
+        # Arrays to store counts for each element
+        prev_less = [0] * n
+        next_less = [0] * n
+
+        # Step 1: Find Previous Less Count for Each Element
+        for i in range(n):
+            count = 1
+            while stack and arr[i] < stack[-1][0]:
+                count += stack.pop()[1]
+            stack.append((arr[i], count))
+            prev_less[i] = count
+
+        # Reset the stack for next less calculation
+        stack = []
+
+        # Step 2: Find Next Less Count for Each Element
+        for i in range(n - 1, -1, -1):
+            count = 1
+            while stack and arr[i] <= stack[-1][0]:
+                count += stack.pop()[1]
+            stack.append((arr[i], count))
+            next_less[i] = count
+
+        # Step 3: Calculate result using contribution of each element
+        for i in range(n):
+            res += arr[i] * prev_less[i] * next_less[i]
+
+        return res % MOD
