@@ -1,0 +1,39 @@
+from typing import Optional
+
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def minDepth(self, root: Optional[TreeNode]) -> int:
+        # If tree is empty, depth is 0
+        if not root:
+            return 0
+
+        # If left subtree is None, recurse only on right
+        if not root.left:
+            return 1 + self.minDepth(root.right)
+
+        # If right subtree is None, recurse only on left
+        if not root.right:
+            return 1 + self.minDepth(root.left)
+
+        # If both subtrees exist, take the minimum of the two
+        return 1 + min(self.minDepth(root.left), self.minDepth(root.right))
+
+
+def build_example_tree():
+
+    node4 = TreeNode(4)
+    node2 = TreeNode(2, left=node4)
+    node3 = TreeNode(3)
+    root = TreeNode(1, left=node2, right=node3)
+    return root
+
+if __name__ == "__main__":
+    root = build_example_tree()
+    sol = Solution()
+    print("Minimum Depth:", sol.minDepth(root))  
