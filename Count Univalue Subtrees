@@ -1,0 +1,23 @@
+class Solution:
+    def countUnivalSubtrees(self, root: Optional[TreeNode]) -> int:
+        self.count = 0
+
+        def dfs(node):
+            if not node:
+                return True
+
+            left_uni = dfs(node.left)
+            right_uni = dfs(node.right)
+
+            if not left_uni or not right_uni:
+                return False
+
+            if node.left and node.left.val != node.val:
+                return False
+            if node.right and node.right.val != node.val:
+                return False
+
+            self.count +=1
+            return True
+        dfs(root)
+        return self.count
