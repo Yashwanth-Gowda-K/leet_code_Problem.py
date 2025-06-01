@@ -1,0 +1,16 @@
+class Solution:
+    def dominantIndex(self, nums: List[int]) -> int:
+        # Finding the largest number 
+        max_num = max(nums)
+
+        # Finding the largest index
+        max_index = nums.index(max_num)
+
+
+        for i , num in enumerate(nums):
+            if i == max_index:
+                continue
+            
+            if max_num < 2 * num:
+                return -1
+        return max_index
