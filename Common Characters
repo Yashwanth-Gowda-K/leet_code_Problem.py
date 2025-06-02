@@ -1,0 +1,11 @@
+from collections import Counter
+from typing import List
+
+class Solution:
+    def commonChars(self, words: List[str]) -> List[str]:
+        common = Counter(words[0])
+        for word in words[1:]:
+            current = Counter(word)
+            for char in common:
+                common[char] = min(common[char], current.get(char, 0))
+        return [char for char in common for _ in range(common[char])]
